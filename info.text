@@ -1,0 +1,8 @@
+credentails:
+user:
+email: "monir@gmail.com",
+password: "123456",
+
+admin:
+email: "bappy@gmail.com",
+password: "123abc",
