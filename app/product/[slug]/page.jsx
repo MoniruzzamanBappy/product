@@ -34,13 +34,13 @@ function ProductDetails({ params }) {
 
   const handleBuyClick = () => {
     toastSuccess({ message: "Product added to the cart!" });
-    const existingData = localStorage.getItem("cart");
+    const existingData = window?.localStorage?.getItem("cart");
     const existingDataJson = JSON.parse(existingData);
     const newData = { ...productDetails };
     const updatedData = existingDataJson
       ? [...existingDataJson, newData]
       : [newData];
-    localStorage.setItem("cart", JSON.stringify(updatedData));
+    window?.localStorage?.setItem("cart", JSON.stringify(updatedData));
   };
 
   return (

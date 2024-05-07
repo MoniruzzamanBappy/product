@@ -10,7 +10,7 @@ import { HiOutlineArrowLeft } from "react-icons/hi";
 
 function Checkout() {
   const router = useRouter();
-  const cart = localStorage.getItem("cart");
+  const cart = window?.localStorage?.getItem("cart");
   const cartData = JSON.parse(cart);
   const total = cartData?.reduce((acc, item) => acc + item.price, 0);
   const [form, setForm] = useState({
@@ -33,7 +33,7 @@ function Checkout() {
   const handleSubmit = (e) => {
     e.preventDefault();
     toastSuccess({ message: "Order placed successfully!" });
-    localStorage.removeItem("cart");
+    window?.localStorage?.removeItem("cart");
     router.push("/product");
   };
 

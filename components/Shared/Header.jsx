@@ -39,7 +39,7 @@ function Header({ uiStore, authStore }) {
   useEffect(() => {
     // check in every 3 seconds
     const interval = setInterval(() => {
-      const cart = localStorage.getItem("cart");
+      const cart = window?.localStorage?.getItem("cart");
       const cartData = JSON.parse(cart);
       setCartData(cartData);
     }, 1000);
