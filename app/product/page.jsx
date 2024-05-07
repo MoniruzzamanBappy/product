@@ -28,6 +28,13 @@ const Card = React.memo(({ data, open, setOpen, handleCardClick, isAdmin }) => {
 
   const handleBuyClick = () => {
     toastSuccess({ message: "Product added to the cart!" });
+    const existingData = localStorage.getItem("cart");
+    const existingDataJson = JSON.parse(existingData);
+    const newData = { ...data };
+    const updatedData = existingDataJson
+      ? [...existingDataJson, newData]
+      : [newData];
+    localStorage.setItem("cart", JSON.stringify(updatedData));
   };
 
   return (
@@ -93,11 +100,11 @@ const Card = React.memo(({ data, open, setOpen, handleCardClick, isAdmin }) => {
       </div>
       <div className="flex justify-center items-center">
         <div
-          onClick={handleBuyClick}
+          onClick={() => handleBuyClick()}
           className="absolute py-2 bottom-0 w-11/12 cursor-pointer"
         >
           <span className="flex items-center justify-between bg-default border text-center rounded-md p-2">
-            Buy Now
+            Add to Cart
             <span className="text-xl">
               <BsFillCartPlusFill />
             </span>

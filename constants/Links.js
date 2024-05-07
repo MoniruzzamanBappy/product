@@ -36,4 +36,9 @@ export const LINKS = {
     path: `${prefix}/product`,
     state: "product",
   },
+  checkout: {
+    title: "Checkout",
+    path: `${prefix}/checkout`,
+    state: "checkout",
+  },
 };

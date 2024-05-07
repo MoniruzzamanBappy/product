@@ -1,6 +1,7 @@
 "use client";
 
 import GuardHoc from "@/components/Shared/GuardHoc";
+import { toastSuccess } from "@/components/Shared/ToastHelpers";
 import { product } from "@/public/product";
 
 import { get } from "lodash";
@@ -8,6 +9,8 @@ import { observer } from "mobx-react";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { BsFillCartPlusFill } from "react-icons/bs";
 import { CiStar } from "react-icons/ci";
 import { MdArrowBack } from "react-icons/md";
 
@@ -25,6 +28,21 @@ function ProductDetails({ params }) {
     router.back();
   };
 
+  const handleSell = () => {
+    toastSuccess({ message: "Link generated and copied!" });
+  };
+
+  const handleBuyClick = () => {
+    toastSuccess({ message: "Product added to the cart!" });
+    const existingData = localStorage.getItem("cart");
+    const existingDataJson = JSON.parse(existingData);
+    const newData = { ...productDetails };
+    const updatedData = existingDataJson
+      ? [...existingDataJson, newData]
+      : [newData];
+    localStorage.setItem("cart", JSON.stringify(updatedData));
+  };
+
   return (
     <div>
       <title>Product Details - User & Product</title>
@@ -40,6 +58,26 @@ function ProductDetails({ params }) {
             <span className="text-lg">{rating}</span>
             <CiStar size={22} />
           </div>
+        </div>
+        <div className="flex justify-center gap-10 items-center">
+          <div
+            onClick={() => handleBuyClick()}
+            className=" py-2  cursor-pointer"
+          >
+            <span className="flex items-center justify-between gap-4 bg-default border text-center rounded-md p-2">
+              Add to Cart
+              <span className="text-xl">
+                <BsFillCartPlusFill />
+              </span>
+            </span>
+          </div>
+          <button
+            onClick={handleSell}
+            className="bg-accent text-white p-2 rounded-lg flex items-center justify-center gap-2"
+          >
+            <span>Sell This Product</span>
+            <AiOutlineArrowRight />
+          </button>
         </div>
       </div>
       <div
