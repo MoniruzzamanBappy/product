@@ -28,13 +28,15 @@ const Card = React.memo(({ data, open, setOpen, handleCardClick, isAdmin }) => {
 
   const handleBuyClick = () => {
     toastSuccess({ message: "Product added to the cart!" });
-    const existingData = window?.localStorage?.getItem("cart");
+    const existingData =
+      typeof window !== "undefined" && window?.localStorage?.getItem("cart");
     const existingDataJson = JSON.parse(existingData);
     const newData = { ...data };
     const updatedData = existingDataJson
       ? [...existingDataJson, newData]
       : [newData];
-    window?.localStorage?.setItem("cart", JSON.stringify(updatedData));
+    typeof window !== "undefined" &&
+      window?.localStorage?.setItem("cart", JSON.stringify(updatedData));
   };
 
   return (

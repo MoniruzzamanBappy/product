@@ -30,7 +30,7 @@ function Header({ uiStore, authStore }) {
   const { getMe, getAuth } = authStore;
   const [cartData, setCartData] = useState([]);
   const token =
-    typeof window !== "undefined" ? window?.localStorage?.getItem("token") : "";
+    typeof window !== "undefined" ? localStorage?.getItem("token") : "";
 
   const router = useRouter();
 
@@ -39,7 +39,8 @@ function Header({ uiStore, authStore }) {
   useEffect(() => {
     // check in every 3 seconds
     const interval = setInterval(() => {
-      const cart = window?.localStorage?.getItem("cart");
+      const cart =
+        typeof window !== "undefined" && window?.localStorage?.getItem("cart");
       const cartData = JSON.parse(cart);
       setCartData(cartData);
     }, 1000);
